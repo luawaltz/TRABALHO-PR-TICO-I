@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <math.h>
+
+float soma(float a, float b) {
+    return a + b;
+}
+
+float subtracao(float a, float b) {
+    return a - b;
+}
+
+float multiplicacao(float a, float b) {
+    return a * b;
+}
+
+float divisao(float a, float b) {
+    if (b != 0) {
+        return a / b;
+    } else {
+        return -1; 
+    }
+}
+
+float exponenciacao(float base, float expoente) {
+    return pow(base, expoente);
+}
+
+float raiz_quadrada(float a) {
+    if (a >= 0) {
+        return sqrt(a);
+    } else {
+        return -1; 
+    }
+}
+
+float modulo(float a, float b) {
+    if (b != 0) {
+        return fmod(a, b);
+    } else {
+        return -1; 
+    }
+}
+
+void bhaskara(float a, float b, float c, float* x1, float* x2) {
+    float delta = b * b - 4 * a * c;
+    if (delta < 0) {
+        *x1 = *x2 = -1; 
+    } else {
+        *x1 = (-b + sqrt(delta)) / (2 * a);
+        *x2 = (-b - sqrt(delta)) / (2 * a);
+    }
+}
+
+int main() {
+    int preferencia;
+    float num1, num2, num3, z1, z2;
+
+    printf("Digite dois numeros: ");
+    scanf("%f %f", &num1, &num2);
+
+    printf("Digite mais tres numeros para Bhaskara: ");
+    scanf("%f %f %f", &num3, &z1, &z2);
+
+    do {
+        printf("\nCalculadora\n");
+        printf("Escolha a operacao:\n");
+        printf("1. Soma\n");
+        printf("2. Subtracao\n");
+        printf("3. Multiplicacao\n");
+        printf("4. Divisao\n");
+        printf("5. Exponenciacao\n");
+        printf("6. Raiz Quadrada\n");
+        printf("7. Modulo\n");
+        printf("8. Bhaskara\n");
+        printf("0. Sair\n");
+
+        scanf("%d", &preferencia);
+
+        switch (preferencia) {
+            case 1: printf("Soma: %.2f\n", soma(num1, num2)); break;
+            case 2: printf("Subtracao: %.2f\n", subtracao(num1, num2)); break;
+            case 3: printf("Multiplicacao: %.2f\n", multiplicacao(num1, num2)); break;
+            case 4: printf("Divisao: %.2f\n", divisao(num1, num2)); break;
+            case 5: printf("Exponenciacao: %.2f\n", exponenciacao(num1, num2)); break;
+            case 6: printf("Raiz Quadrada: %.2f\n", raiz_quadrada(num1)); break;
+            case 7: printf("Modulo: %.2f\n", modulo(num1, num2)); break;
+            case 8: {
+                float x1, x2;
+                bhaskara(num3, z1, z2, &x1, &x2);
+                printf("Raizes: x1 = %.2f, x2 = %.2f\n", x1, x2);
+                break;
+            }
+            
+        }
+    } while (preferencia != 0);
+
+    return 0;
+}
